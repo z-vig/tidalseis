@@ -1,0 +1,59 @@
+SEED Channel	Data Center	Archive Description
+ACE	No	Administrative clock error. A text-based message detailing clock quality changes.
+ACU	Continuous	N/A
+BCI	Continuous	Broadband (20 or 40 sps); Calibration input to the signal.
+BH[ZNE]	Continuous	Broadband (20 or 40 sps); Seismic data: High gain; standard convention: BH[ZNE]
+BH[1-n]	Continuous	Broadband (20 or 40 sps); Seismic data: High gain; downhole; convention: BH[1-n]* lower numbers are lower in the hole, typically 123 is at the bottom, 456 mid-hole and 789 top of hole
+BJ[ZNE]	SCEDC continuously archives: CBC, DJJB, GSA, LBW1, LBW2, MIK, RSS, FA.FABS	Broadband (20 or 40 sps); Seismic data: Rotational value for a high gain seismometer; standard convention: BL[ZNE]
+BL[ZNE]	SCEDC continuously archives: CBC, DJJB, GSA, LBW1, LBW2, MIK, RSS, FA.FABS	Broadband (20 or 40 sps); Seismic data: Low gain; standard convention: BL[ZNE]
+BN[ZNE]	SCEDC continuously archives: CBC, DJJB, GSA, LBW1, LBW2, MIK, RSS, FA.FABS	Broadband (20 or 40 sps); Seismic data: Low gain; standard convention: BN[ZNE]
+BN[1-n]	SCEDC continuously archives: CBC, DJJB, GSA, LBW1, LBW2, MIK, RSS, FA.FABS	Broadband (20 or 40 sps); Seismic data: Accelerometer; standard convention: BN[1-n]
+EH[ZNE]	Triggered	Extremely Short Period (100 sps; historic channels 62.5 sps); Seismic data; High gain; standard convention: EH[ZNE]
+EH[123]	Continuous	Extremely Short Period (100 sps; historic channels 62.5 sps); Seismic data; High gain; standard convention: EH[123]
+EL[ZNE]	Triggered	Extremely Short Period (100 sps); Seismic data; High gain; standard convention: EL[ZNE]
+HD[IO]	Triggered for: GLA, ISA, NEE, PAS, RPV, SNCC, USC	High Broadband (80 or 100 sps); Pressure: barometer, or microbarometer pressure; I: inside; O: outside; HD[IO]
+HH[ZNE]	Triggered	High Broadband (80 or 100 sps); Seismic data: High gain; standard convention: HH[ZNE]
+HJ[ZNE]	Continuous	High Broadband (80 or 100 sps); Seismic data: Rotational value of high gain seismometer; standard convention: HH[ZNE]
+HL[ZNE]	Triggered	High Broadband (80 or 100 sps); Seismic data: Accelerometer; standard convention: HL[ZNE]
+HL[1-n]	Triggered	High Broadband (80 or 100 sps); Seismic data: Accelerometer; downhole standard convention: HL[1-n]
+HN[ZNE] or HN[123456]	Triggered	High Broadband (80 or 100 sps); Seismic data: Accelerometer; standard convention: HN[ZNE] or HN[123]
+LCE	Continuous	Long period (1 sps); Clock channel, phase error in microseconds
+LCL	Continuous	Long period (1 sps); Clock channel, lock loss in minutes
+LCQ	Continuous	Long period (1 sps); Clock channel, clock quality as a percentage (0 - 100)%
+LD[IO]	Continuous	Long period (1 sps); Pressure: barometer, or microbarometer pressure; I: inside; O: outside; LD[IO]
+LEB	Continuous	Long period (1 sps); Battery voltage
+LEC	Continuous	Long period (1 sps); Input DC current
+LEP	No	Long period (1 sps); Quanterra DC voltage
+LH[ZNE]	Continuous	Long period (1 sps); Seismic data: High gain; standard convention: LH[ZNE]
+LH[12]	Continuous	Long period (1 sps); Seismic data: High gain; standard convention: LH[ZNE]
+LL[ZNE]	Continuous	Long period (1 sps); Seismic data: Low gain; standard convention: LL[ZNE]
+LII	Continuous	Long period (1 sps); Internal humidity of datalogger.
+LJ[ZNE]	Continuous	Long period (1 sps); Rotational value of high gain seismometer
+LKI	Continuous	Long period (1 sps); Internal temperature of data logger.
+LL[1-n]	Continuous	Long period (1 sps); Seismic data: Low gain; downhole; convention: LL[1-n]
+LN[ZNE] or LN[1-n]	Continuous	Long period (1 sps); Seismic data: Low gain; standard convention: LN[ZNE] or LN[1-n]
+LOG	No	Datalogger-generated log messages related to operation, event detection and clock information. This channel is generally the definitive reference for datalogger diagnostic issues; qlog application will convert to text output.
+LTW	Continuous	Long period (1 sps); Depth of water at monitoring site.
+MH[ZNE]	Continuous	Mid period (1 - 10 sps); Seismic data: High gain; standard convention: MH[ZNE]
+OCF	Continuous	Opaque configuration file for datalogger.
+SH[ZNE]	Triggered	Short Period (50 sps); Seismic data; High gain; standard convention: SH[ZNE] *only from NC, NN, SN networks		
+UCD	No	Ultra Long Period (0.01 sps); Quanterra clock drift
+UCQ	No	Ultra Long Period (0.01 sps); Quanterra clock quality
+UEP	No	Ultra Long Period (0.01 sps); Quanterra DC voltage
+UF[1...n]	No	Ultra Long Period (0.01 sps); Quanterra free telemetry buffer; UF[1...n]
+UFC	No	Ultra Long Period (0.01 sps); Quanterra clock freq control
+UK2	No	Ultra Long Period (0.01 sps); Temperature: Quanterra internal temperature
+UM[ZNE] or UM[UVW]	No	Ultra Long Period (0.01 sps); Mass Position; STS-1/Gurlap convention: UM[ZNE]; STS-2 convention: UM[UVW];
+VCE	Continuous	Very long period (0.1 sps); Clock channel, phase error in microseconds
+VCO	Continuous	Very long period (0.1 sps); PLL channel, VCO value. A measure of automatic adjustment applied to the oscillator to raise or lower the clock frequency to phase lock with UTC.
+VCQ	Continuous	Very long period (0.1 sps); Clock channel, clock quality as a percentage (0-100)%.
+VD[IO]	Continuous only if LD_ not available	Very long period (0.1 sps); Pressure: barometer, or microbarometer pressure; I: inside; O: outside; VD[IO]
+VEA	YES	Very long period (0.1 sps); System status channel, q330 internal temperature in degrees C.
+VEC	YES	Very long period (0.1 sps); System status channel, the current supplied to GPS antenna in milliamps.
+VEP	YES	Very long period (0.1 sps); Input DC power, available only on 730, 680 systems.
+VFP	Continuous	Very long period (0.1 sps); Quanterra free telemetry buffer;
+VH[ZNE]	Continuous	Very long period (0.1 sps); Seismic data: High gain; standard convention: VH[ZNE]
+VK2	No	Very long period (0.1 sps); Temperature: Quanterra internal temperature
+VK[IO]	Continuous	Very long period (0.1 sps); Temperature: Quanterra internal temperature; I: inside; O: outside; VK[IO]
+VM[ZNE] or VM[UVW]	Continuous	Very long period (0.1 sps); Mass Position; STS-1/Gurlap convention: VM[ZNE]; STS-2 convention: VM[UVW];
+VN[ZNE]	Continuous	Very long period (0.1 sps); Seismic data: Accelerometer; standard convention: VN[ZNE]

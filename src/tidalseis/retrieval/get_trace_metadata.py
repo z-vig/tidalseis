@@ -1,0 +1,42 @@
+from datetime import datetime
+
+from obspy.clients.fdsn import Client  # type: ignore
+from obspy import UTCDateTime, Inventory  # type: ignore
+
+import tidalseis.obspy_validation as vld
+
+
+def get_iris_inventory(
+    network_code: str,
+    network_start: datetime,
+    network_end: datetime,
+    channel_search: str,
+) -> Inventory:
+
+    client = Client("Earthscope")
+    inventory = vld.validate_inventory(
+        client.get_stations(
+            network=network_code,
+            station="*",
+            location="",
+            channel=channel_search,
+            level="channel",
+            starttime=UTCDateTime(network_start),
+            endtime=UTCDateTime(network_end),
+            includeavailability=True,
+        )
+    )
+    return inventory
+
+
+def get_channel_info(inventory: Inventory) -> dict[str, tuple[str, float]]:
+    """
+    Returns all channel information for a single-network inventory.
+
+    Returns
+    -------
+    dict[str, tuple[str, float]]
+        Dictionary where keys are station names, values are tuples of channel
+        names and sampling rate.
+    """
+    return dict()
