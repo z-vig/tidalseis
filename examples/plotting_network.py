@@ -19,4 +19,4 @@ def analyze_network(network_path: str | Path):
     plot_network_timeline(traces)
 
 
-analyze_network("D:/seismic_data/pine_island_glacier/")
+analyze_network("D:/seismic_data/amery_ice_shelf/")

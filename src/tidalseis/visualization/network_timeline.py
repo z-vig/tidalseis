@@ -64,7 +64,7 @@ def plot_network_timeline(traces: list[StationTraces]) -> None:
                 continue
             ax.plot(span, [n] * len(span), color=clrmap(norm(n)), lw=10)
     ax.set_yticks(
-        np.arange(0, len(components.stations)), labels=components.stations
+        np.arange(0, len(components.stations)), labels=sorted_stations
     )
     ax.set(xlabel="Time", ylabel="Station ID")
     plt.show()
