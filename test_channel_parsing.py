@@ -1,6 +1,69 @@
 import re
+from typing import Literal, TypeAlias
+from dataclasses import dataclass
 
-CHANNEL_CODE_PATTERNS: dict[str, re.Pattern[str]] = {
+SEEDCodeCategory: TypeAlias = Literal[
+    "ACE",
+    "ACU",
+    "BCI",
+    "BH[ZNE]",
+    "BH[1-n]",
+    "BJ[ZNE]",
+    "BL[ZNE]",
+    "BN[ZNE]",
+    "BN[1-n]",
+    "EH[ZNE]",
+    "EH[123]",
+    "EL[ZNE]",
+    "HD[IO]",
+    "HH[ZNE]",
+    "HJ[ZNE]",
+    "HL[ZNE]",
+    "HL[1-n]",
+    "HN[ZNE] or HN[123456]",
+    "LCE",
+    "LCL",
+    "LCQ",
+    "LD[IO]",
+    "LEB",
+    "LEC",
+    "LEP",
+    "LH[ZNE]",
+    "LH[12]",
+    "LL[ZNE]",
+    "LII",
+    "LJ[ZNE]",
+    "LKI",
+    "LL[1-n]",
+    "LN[ZNE] or LN[1-n]",
+    "LOG",
+    "LTW",
+    "MH[ZNE]",
+    "OCF",
+    "SH[ZNE]",
+    "UCD",
+    "UCQ",
+    "UEP",
+    "UF[1...n]",
+    "UFC",
+    "UK2",
+    "UM[ZNE] or UM[UVW]",
+    "VCE",
+    "VCO",
+    "VCQ",
+    "VD[IO]",
+    "VEA",
+    "VEC",
+    "VEP",
+    "VFP",
+    "VH[ZNE]",
+    "VK2",
+    "VK[IO]",
+    "VM[ZNE] or VM[UVW]",
+    "VN[ZNE]",
+]
+
+CHANNEL_CODE_PATTERNS: dict[SEEDCodeCategory, re.Pattern[str]] = {
     "ACE": re.compile(r"^ACE$"),
     "ACU": re.compile(r"^ACU$"),
     "BCI": re.compile(r"^BCI$"),
@@ -11,6 +74,7 @@ CHANNEL_CODE_PATTERNS: dict[str, re.Pattern[str]] = {
     "BN[ZNE]": re.compile(r"^BN[ZNE]$"),
     "BN[1-n]": re.compile(r"^BN\d+$"),
     "EH[ZNE]": re.compile(r"^EH[ZNE]$"),
+    "EH[123]": re.compile(r"^EH[123]$"),
     "EL[ZNE]": re.compile(r"^EL[ZNE]$"),
     "HD[IO]": re.compile(r"^HD[IO]$"),
     "HH[ZNE]": re.compile(r"^HH[ZNE]$"),
@@ -27,6 +91,7 @@ CHANNEL_CODE_PATTERNS: dict[str, re.Pattern[str]] = {
     "LEP": re.compile(r"^LEP$"),
     "LH[ZNE]": re.compile(r"^LH[ZNE]$"),
     "LH[12]": re.compile(r"^LH[12]$"),
+    "LL[ZNE]": re.compile(r"^LL[ZNE]$"),
     "LII": re.compile(r"^LII$"),
     "LJ[ZNE]": re.compile(r"^LJ[ZNE]$"),
     "LKI": re.compile(r"^LKI$"),
@@ -58,3 +123,37 @@ CHANNEL_CODE_PATTERNS: dict[str, re.Pattern[str]] = {
     "VM[ZNE] or VM[UVW]": re.compile(r"^VM[ZNEUVW]$"),
     "VN[ZNE]": re.compile(r"^VN[ZNE]$"),
 }
+
+
+@dataclass
+class SEEDCodeMetaData:
+    code: str
+    category: SEEDCodeCategory
+    archive: str
+    data_type: str
+    config: str
+    gain: str
+    period: str
+    desc: str
+
+
+def get_code_category(code: str) -> SEEDCodeCategory:
+    for k, v in CHANNEL_CODE_PATTERNS.items():
+        if re.fullmatch(v, code):
+            return k
+    raise ValueError("Code does not match any category.")
+
+
+def get_code_metadata(code: str, cat: SEEDCodeCategory) -> SEEDCodeMetaData:
+    with open("./SEED_code_data.csv", "r") as f:
+        for line in f.readlines():
+            line_list = [i.strip() for i in line.split(",")]
+            if line_list[0] == cat:
+                return SEEDCodeMetaData(code, cat, *line_list[1:])
+    raise ValueError("Code was not found in metadata table.")
+
+
+code = "EPZ"
+category = get_code_category(code)
+meta = get_code_metadata(code, category)
+print(meta)

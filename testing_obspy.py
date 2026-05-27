@@ -4,7 +4,6 @@ from obspy import UTCDateTime  # type: ignore
 from examples.station_metadata_catalog import AmeryStation
 
 import tidalseis.obspy_validation as vld
-import csv
 
 client = Client("Earthscope")
 

@@ -1,0 +1,59 @@
+Channel Type,Archive,Data Type,Configuration,Gain,Period,Description
+ACE,N/A,Clock,N/A,N/A,N/A,Administrative Clock Error
+ ACU,Continuous,N/A,N/A,N/A,N/A,
+ BCI,Continuous,Calibration,N/A,N/A,N/A,
+ BH[ZNE],Continuous,Seismometer,Surface,High,Broadband,
+ BH[1-n],Continuous,Seismometer,Downhole,High,Broadband,lower numbers are lower in the hole; 123 is at the bottom; 456 is mid-hole; 789 top
+ BJ[ZNE],Continuous,Rotation,N/A,High,Broadband,
+ BL[ZNE],Continuous,Seismometer,Surface,Low,Broadband,
+ BN[ZNE],Continuous,Seismometer,Surface,Low,Broadband,
+ BN[1-n],Continuous,Seismometer,Accelerometer,N/A,Broadband,
+ EH[ZNE],Triggered,Seismometer,Surface,High,Extremely Short Period,
+ EH[123],Continuous,Seismometer,Surface,High,Extremely Short Period,
+ EL[ZNE],Triggered,Seismometer,Surface,High,Extremely Short Period,
+ HD[IO],Triggered,Barometer,N/A,N/A,High Broadband,I is inside; O is outside
+ HH[ZNE],Triggered,Seismometer,Surface,High,High Broadband,
+ HJ[ZNE],Continuous,Rotation,N/A,N/A,High Broadband,
+ HL[ZNE],Triggered,Seismometer,Accelerometer,N/A,High Broadband,
+ HL[1-n],Triggered,Seismometer,Accelerometer,N/A,High Broadband,
+ HN[ZNE] or HN[123456],Triggered,Seismometer,N/A,N/A,High Broadband,
+ LCE,Continuous,Clock,N/A,N/A,Long Period,Phase Error in Seconds
+ LCL,Continuous,Clock,N/A,N/A,Long Period,Lock Loss in minutes
+ LCQ,Continuous,Clock,N/A,N/A,Long Period,Clock Quality as percentage
+ LD[IO],Continuous,Barometer,N/A,N/A,Long Period,I is inside; O is outside
+ LEB,Continuous,Voltage,N/A,N/A,Long Period,Battery Voltage
+ LEC,Continuous,Current,N/A,N/A,Long Period,Input DC current
+ LEP,N/A,Voltage,N/A,N/A,Long Period,
+ LH[ZNE],Continuous,Seismometer,Surface,High,Long Period,
+ LH[12],Continuous,Seismometer,Surface,High,Long Period,
+ LL[ZNE],Continuous,Seismometer,Surface,Low,Long Period,
+ LII,Continuous,Humidity,N/A,N/A,Long Period,Internal humidity of datalogger
+ LJ[ZNE],Continuous,Rotation,N/A,N/A,Long Period,
+ LKI,Continuous,Temperature,N/A,N/A,Long Period,
+ LL[1-n],Continuous,Seismometer,Downhole,Low,Long Period,
+ LN[ZNE] or LN[1-n],Continuous,Seismometer,Surface,Low,Long Period,
+ LOG,N/A,Log Messages,N/A,N/A,N/A,
+ LTW,Continuous,Depth of Water,N/A,N/A,Long Period,
+ MH[ZNE],Continuous,Seismometer,Surface,High,Mid Period,
+ OCF,Continuous,Log Messages,N/A,N/A,N/A,
+ SH[ZNE],Triggered,Seismometer,Surface,High,Short Period,
+ UCD,N/A,Clock,N/A,N/A,Ultra Long Period,Clock Drift
+ UCQ,N/A,Clock,N/A,N/A,Ultra Long Period,Clock Quality as percentage
+ UEP,N/A,Voltage,N/A,N/A,Ultra Long Period,
+ UF[1...n],N/A,Log Messages,N/A,N/A,Ultra Long Period,Telemetry Buffer
+ UFC,N/A,Clock,N/A,N/A,Ultra Long Period,Clock Freq control
+ UK2,N/A,Temperature,N/A,N/A,Ultra Long Period,
+ UM[ZNE] or UM[UVW],N/A,Mass Position,N/A,N/A,Ultra Long Period,
+ VCE,Continuous,Clock,N/A,N/A,Very Long Period,phase error in microseconds
+ VCO,Continuous,Clock,N/A,N/A,Very Long Period,Automatic adjust of oscillator to phase lock with UTC
+ VCQ,Continuous,Clock,N/A,N/A,Very Long Period,Clock Quality as percentage
+ VD[IO],Continuous,Barometer,N/A,N/A,Very Long Period,
+ VEA,N/A,Temperature,N/A,N/A,Very Long Period,
+ VEC,N/A,Current,N/A,N/A,Very Long Period,Current to GPS antenna
+ VEP,N/A,Voltage,N/A,N/A,Very Long Period,Input DC Power
+ VFP,Continuous,Log Messages,N/A,N/A,Very Long Period,
+ VH[ZNE],Continuous,Seismometer,Surface,High,Very Long Period,
+ VK2,N/A,Temperature,N/A,N/A,Very Long Period,
+ VK[IO],Continuous,Temperature,N/A,N/A,Very Long Period,
+ VM[ZNE] or VM[UVW],Continuous,Mass Position,N/A,N/A,Very Long Period,
+ VN[ZNE],Continuous,Seismometer,Accelerometer,N/A,Very Long Period,

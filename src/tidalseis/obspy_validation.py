@@ -1,10 +1,11 @@
 from typing import Any
+from datetime import datetime
 
 from obspy import Stream, Inventory, Trace, UTCDateTime  # type: ignore
 from obspy.core.trace import Stats  # type: ignore
 from obspy.core.inventory.station import Station  # type: ignore
 from obspy.core.inventory.channel import Channel  # type: ignore
-from obspy.core.inventory.util import DataAvailability  # type: ignore
+from obspy.core.inventory.util import DataAvailability, SampleRate  # type: ignore
 
 
 def validate_stream(val: Any) -> Stream:
@@ -52,4 +53,16 @@ def validate_utc(val: Any) -> UTCDateTime:
 def validate_stats(val: Any) -> Stats:
     if not isinstance(val, Stats):
         raise TypeError(f"Value is not Stats: {val}")
+    return val
+
+
+def validate_sample_rate(val: Any) -> float:
+    if not isinstance(val, SampleRate):
+        raise TypeError(f"Value is not SampleRate: {val}")
+    return val.real
+
+
+def validate_datetime(val: Any) -> datetime:
+    if not isinstance(val, datetime):
+        raise TypeError(f"Value is not datetime: {val}")
     return val
