@@ -6,24 +6,6 @@ import numpy as np
 from tidalseis.retrieval.models import StationTraces
 
 
-def read_network_traces(trace_directory: str | Path) -> list[StationTraces]:
-    all_network_traces: list[StationTraces] = []
-    for f in Path(trace_directory).glob("*.json"):
-        all_network_traces.append(StationTraces.from_json(f))
-    return all_network_traces
-
-
-def extract_coords(
-    traces: list[StationTraces],
-) -> tuple[np.ndarray, list[str]]:
-    coord_arr = np.empty((len(traces), 3), dtype=np.float32)
-    row_names: list[str] = []
-    for n, tr in enumerate(traces):
-        coord_arr[n, :] = (tr.station.lat, tr.station.long, tr.station.elev)
-        row_names.append(tr.station.code)
-    return coord_arr, row_names
-
-
 def consolidate_span_arr(
     a: np.ndarray, threshold: timedelta = timedelta(seconds=1)
 ) -> np.ndarray:
@@ -42,6 +24,17 @@ def consolidate_span_arr(
     consolidated.append([current_start, current_end])
 
     return np.array(consolidated, dtype=a.dtype)
+
+
+def extract_coords(
+    traces: list[StationTraces],
+) -> tuple[np.ndarray, list[str]]:
+    coord_arr = np.empty((len(traces), 3), dtype=np.float32)
+    row_names: list[str] = []
+    for n, tr in enumerate(traces):
+        coord_arr[n, :] = (tr.station.lat, tr.station.long, tr.station.elev)
+        row_names.append(tr.station.code)
+    return coord_arr, row_names
 
 
 def extract_timelines(

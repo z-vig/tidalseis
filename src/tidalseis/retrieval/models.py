@@ -8,7 +8,7 @@ import numpy as np
 from obspy.core.inventory import Station, Channel  # type: ignore
 from obspy import Trace  # type: ignore
 
-import tidalseis.obspy_validation as vld
+import tidalseis._obspy_validation as vld
 
 
 class ChannelModel(BaseModel):

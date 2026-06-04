@@ -16,9 +16,10 @@ from .models import (
     ChannelModel,
     StationModel,
     TraceModel,
+    StationTraces,
     make_trace_metadata,
 )
-import tidalseis.obspy_validation as vld
+import tidalseis._obspy_validation as vld
 
 
 def to_datetime(date):
@@ -222,7 +223,7 @@ def _handle_trace_splitting(
     return sub_traces, sub_models
 
 
-def load_traces(
+def get_trace_models(
     *,
     network_id: str,
     network_start: datetime,
@@ -236,7 +237,7 @@ def load_traces(
     replace: bool = False,
 ) -> tuple[np.ndarray, list[TraceModel]]:
     """
-    Loads seismic traces from a single station and a single channel from a
+    Gets seismic traces of a single station and a single channel from a
     seismic network and optionally saves them to disk.
 
     Parameters
@@ -335,12 +336,33 @@ def load_traces(
                 sub_traces, sub_models = _handle_trace_splitting(
                     tr, span_list, trace_list
                 )
+
+                # only works if save dir is specified
                 save_trace_to_dir(sub_traces, sub_models)
+
         elif trace_mode == "add":
             tr = reduce(add, stream.traces)
             sub_traces, sub_models = _handle_trace_splitting(
                 tr, span_list, trace_list
             )
+
+            # only works if save dir is specified
             save_trace_to_dir(sub_traces, sub_models)
 
     return np.array(span_list), trace_list
+
+
+def save_stationtraces_model(
+    station: StationModel,
+    channel: ChannelModel,
+    tracemodels: list[TraceModel],
+    save_directory: str | Path,
+) -> None:
+    """
+    Packages station model, channel model and a list of trace models into a
+    StationTraces object and saves it to a json.
+    """
+    sta_tra = StationTraces(
+        station=station, channel=channel, traces=tracemodels
+    )
+    sta_tra.to_json(Path(save_directory) / station.code)

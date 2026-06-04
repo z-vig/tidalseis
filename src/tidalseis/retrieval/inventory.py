@@ -3,7 +3,7 @@ from datetime import datetime
 from obspy.clients.fdsn import Client  # type: ignore
 from obspy import UTCDateTime, Inventory  # type: ignore
 
-import tidalseis.obspy_validation as vld
+import tidalseis._obspy_validation as vld
 from .models import ChannelModel, StationModel
 
 

@@ -1,3 +1,3 @@
-from .traces import load_traces
+from .traces import get_trace_models
 
-__all__ = ["load_traces"]
+__all__ = ["get_trace_models"]

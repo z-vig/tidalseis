@@ -10,7 +10,10 @@ import matplotlib.colors as mcolor
 import numpy as np
 
 from tidalseis.retrieval.models import StationTraces
-from tidalseis.read_network_traces import extract_stations, extract_timelines
+from tidalseis.load.read_network_traces import (
+    extract_stations,
+    extract_timelines,
+)
 
 
 @dataclass

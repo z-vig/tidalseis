@@ -1,9 +1,9 @@
-from tidalseis.retrieval.traces import load_traces
+from tidalseis.retrieval.traces import (
+    get_trace_models,
+    save_stationtraces_model,
+)
 from tidalseis.retrieval.inventory import get_iris_inventory, get_channel_info
-from tidalseis.retrieval.models import StationTraces
 import network_catalog as pn
-
-from pathlib import Path
 
 NET = pn.AMERY_ICE_SHELF
 
@@ -15,17 +15,16 @@ inv = get_iris_inventory(
 )
 info = get_channel_info(inv)
 
+
 for sta, cha_list in info:
-    span_arr, trace_models = load_traces(
-        **NET, station_id=sta.code, replace=False
-    )
     if len(cha_list) > 1:
         raise ValueError("Single channel networks only.")
-    sta_tra = StationTraces(
-        station=sta, channel=cha_list[0], traces=trace_models
+    span_arr, trace_models = get_trace_models(
+        **NET,
+        station_id=sta.code,
     )
 
-    svdir = NET.get("save_directory")
-    if svdir is None:
+    if (svdir := NET.get("save_directory")) is None:
         raise ValueError()
-    sta_tra.to_json(Path(svdir) / sta.code)
+
+    save_stationtraces_model(sta, cha_list[0], trace_models, svdir)
