@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Self
 from uuid import uuid4, UUID
 
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel, computed_field, ConfigDict
 import numpy as np
 from obspy.core.inventory import Station, Channel  # type: ignore
 from obspy import Trace  # type: ignore
@@ -34,6 +34,8 @@ class ChannelModel(BaseModel):
 
 
 class StationModel(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
     code: str
     lat: float
     long: float
