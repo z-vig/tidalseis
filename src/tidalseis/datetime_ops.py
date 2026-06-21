@@ -55,3 +55,12 @@ def chunk_long_timespan(
     )
 
     return start_range, end_range
+
+
+def to_datetime(time: np.datetime64 | datetime) -> datetime:
+    """
+    Narrows a flexible time object down to a datetime.
+    """
+    if isinstance(time, np.datetime64):
+        return time.item()  # type: ignore
+    return time

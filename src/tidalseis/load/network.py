@@ -14,11 +14,12 @@ from tidalseis.retrieval.models import StationTraces, StationModel
 from tidalseis.datetime_ops import is_time_between
 import tidalseis._obspy_validation as vld
 from tidalseis.catalog.preprocess import (
-    PreprocessingFunc,
     PreprocessingConfig,
     PreprocessingFlag,
     preprocess_trace,
 )
+from tidalseis.types import PreprocessingFunc
+
 from .models import OnDiskStation, TraceTimePath
 
 

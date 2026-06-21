@@ -19,11 +19,11 @@ class ChannelModel(BaseModel):
 
     @classmethod
     def from_channel(cls, channel: Channel) -> Self:
-        avail = vld.validate_data_availability(channel.data_availability)
+        # avail = vld.validate_data_availability(channel.data_availability)
         return cls(
             code=channel.code,
-            start=vld.validate_utc(avail.start).datetime,
-            end=vld.validate_utc(avail.end).datetime,
+            start=vld.validate_utc(channel.start_date).datetime,
+            end=vld.validate_utc(channel.end_date).datetime,
             sample_rate=vld.validate_sample_rate(channel.sample_rate),
         )
 

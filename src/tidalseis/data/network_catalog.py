@@ -18,7 +18,7 @@ AMERY_ICE_SHELF: SingleChannelNetworkConfig = {
     "network_end": datetime(2007, 3, 1, 23, 59, 59),
     "location_id": "",
     "channel_id": "EPZ",
-    "save_directory": Path("D:/seismic_data/amery_ice_shelf/trace_data/"),
+    "save_directory": Path("D:/seismic_data/amery_ice_shelf/trace_data_test/"),
 }
 
 PINE_ISLAND_GLACIER: SingleChannelNetworkConfig = {

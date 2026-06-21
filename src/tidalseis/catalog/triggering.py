@@ -1,27 +1,14 @@
-from dataclasses import dataclass
-from typing import Optional, TypedDict, NotRequired
-from pydantic import BaseModel
-from datetime import datetime
+"""
+Event triggering utilities for auto-picking seismic events.
+"""
 
+from typing import TypedDict, Optional
+from dataclasses import dataclass
 
 import obspy  # type: ignore
 from obspy.signal.trigger import coincidence_trigger  # type: ignore
 
 import tidalseis._obspy_validation as vld
-from tidalseis.retrieval.models import StationModel
-
-
-class TriggerDict(TypedDict):
-    time: obspy.UTCDateTime
-    stations: list[str]
-    trace_ids: list[str]
-    coincidence_sum: float
-    similarity: dict
-    duration: float
-    cft_peaks: NotRequired[list[float]]
-    cft_stds: NotRequired[list[float]]
-    cft_peak_wmean: NotRequired[float]
-    cft_std_wmean: NotRequired[float]
 
 
 class CoincidenceTriggerArgs(TypedDict):
@@ -62,25 +49,19 @@ class TriggeringConfig:
         return arg_dict
 
 
-class EventData(BaseModel):
-    event_start: datetime
-    event_end: datetime
-    stations: list[StationModel]
-    waveforms: list[float]
-
-
 def run_coincidece_trigger(
     stream: obspy.Stream, config: TriggeringConfig
-) -> list[TriggerDict]:
+) -> list[vld.TriggerDict]:
     """
     Runs a coincidence trigger for a stream and returns a list of the triggers.
     """
     triggers = coincidence_trigger(
         stream=stream, **config.as_coincidence_trigger_args(), details=True
     )
-    trig_list: list[TriggerDict] = []
+    trig_list: list[vld.TriggerDict] = []
     for t in triggers:
-        trig_dict = vld.validate_trigger(t)
+        trig_dict = t
+        # trig_dict = vld.validate_trigger(t)
 
         # ==== Eliminating invalid triggers ====
         if trig_dict["duration"] > 120:
@@ -94,6 +75,6 @@ def run_coincidece_trigger(
 
 
 def parse_event_data(
-    trace_dict: dict[str, obspy.Trace], triggers: list[TriggerDict]
+    trace_dict: dict[str, obspy.Trace], triggers: list[vld.TriggerDict]
 ) -> None:
     return

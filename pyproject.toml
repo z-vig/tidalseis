@@ -17,9 +17,22 @@ dependencies = [
     "cartopy (>=0.25.0,<0.26.0)",
     "cmap (>=0.7.2,<0.8.0)",
     "pandas>=3.0.3",
+    "click>=8.4.1",
+    "pandas-stubs>=3.0.3.260530",
+    "scipy-stubs>=1.17.1.5",
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[project.scripts]
+download_network = "tidalseis.scripts.download_traces:main"
+create_streams = "tidalseis.scripts.create_streams:main"
+catalog = "tidalseis.scripts.create_catalog:main"
+plot_tide_events = "tidalseis.scripts.plot_tidal_events:main"
+
+[tool.hatch.build]
+include = [
+    "src/tidalseis/data"
+]

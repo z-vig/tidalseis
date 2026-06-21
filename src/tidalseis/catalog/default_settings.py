@@ -5,7 +5,7 @@ DEFAULT_TRIGGERING = TriggeringConfig(
     trigger_type="classicstalta",
     trigger_on_threshold=6,
     trigger_off_threshold=5,
-    num_coincident_stations=2,
+    num_coincident_stations=3,
     long_term_average_length=60,
     short_term_average_length=2,
 )

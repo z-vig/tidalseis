@@ -13,7 +13,6 @@ def get_iris_inventory(
     network_end: datetime,
     channel_search: str = "*",
 ) -> Inventory:
-
     client = Client("Earthscope")
     inventory = vld.validate_inventory(
         client.get_stations(
@@ -24,7 +23,6 @@ def get_iris_inventory(
             level="channel",
             starttime=UTCDateTime(network_start),
             endtime=UTCDateTime(network_end),
-            includeavailability=True,
         )
     )
     return inventory

@@ -1,4 +1,11 @@
-from typing import Any, get_type_hints, get_origin, get_args, TYPE_CHECKING
+from typing import (
+    Any,
+    get_type_hints,
+    get_origin,
+    get_args,
+    TypedDict,
+    NotRequired,
+)
 from datetime import datetime
 
 from obspy import Stream, Inventory, Trace, UTCDateTime  # type: ignore
@@ -7,10 +14,18 @@ from obspy.core.inventory.station import Station  # type: ignore
 from obspy.core.inventory.channel import Channel  # type: ignore
 from obspy.core.inventory.util import DataAvailability, SampleRate  # type: ignore
 
-import tidalseis.catalog.triggering as triggering
 
-if TYPE_CHECKING:
-    from tidalseis.catalog.triggering import TriggerDict
+class TriggerDict(TypedDict):
+    time: UTCDateTime
+    stations: list[str]
+    trace_ids: list[str]
+    coincidence_sum: float
+    similarity: dict
+    duration: float
+    cft_peaks: NotRequired[list[float]]
+    cft_stds: NotRequired[list[float]]
+    cft_peak_wmean: NotRequired[float]
+    cft_std_wmean: NotRequired[float]
 
 
 def _matches_type(value: Any, expected_type: Any) -> bool:
@@ -42,13 +57,13 @@ def is_typed_dict_instance(
     return True
 
 
-def validate_trigger(val: Any) -> "TriggerDict":
+def validate_trigger(val: Any) -> TriggerDict:
     if not isinstance(val, dict):
         raise TypeError(f"Value is not a dictionary: {val}")
-    if not is_typed_dict_instance(val, triggering.TriggerDict):
+    if not is_typed_dict_instance(val, TriggerDict):
         raise TypeError(f"Value is not TriggerDict: {val}")
 
-    trig_dict: triggering.TriggerDict = {
+    trig_dict: TriggerDict = {
         "time": val["time"],
         "stations": val["stations"],
         "trace_ids": val["trace_ids"],

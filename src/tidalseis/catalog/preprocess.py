@@ -1,12 +1,10 @@
 from dataclasses import dataclass
-from typing import Literal, TypeAlias, Optional, overload
+from typing import Literal, Optional, overload
 from enum import IntFlag, auto
-from collections.abc import Callable
 
 import obspy  # type: ignore
 
-FilterType: TypeAlias = Literal["Lowpass", "Highpass", "Bandpass", "None"]
-PreprocessingFunc: TypeAlias = Callable[[obspy.Trace], obspy.Trace]
+from tidalseis.types import FilterType
 
 BAD_BANDPASS_MESSAGE = (
     "If bandpass filtering is used, both high and low frequency cutoffs must"
@@ -37,18 +35,18 @@ class PreprocessingConfig:
         self.validate_filtering()
 
     def validate_filtering(self) -> None:
-        if self.filter_type == "Bandpass":
+        if self.filter_type.lower() == "bandpass":
             if (self.low_frequency_cutoff is None) or (
                 self.high_frequency_cutoff is None
             ):
                 raise ValueError(BAD_BANDPASS_MESSAGE)
-        elif self.filter_type == "Highpass":
+        elif self.filter_type.lower() == "highpass":
             if self.low_frequency_cutoff is None:
                 raise ValueError(BAD_HIGHPASS_MESSAGE)
-        elif self.filter_type == "Lowpass":
+        elif self.filter_type.lower() == "lowpass":
             if self.high_frequency_cutoff is None:
                 raise ValueError(BAD_LOWPASS_MESSAGE)
-        elif self.filter_type == "None":
+        elif self.filter_type.lower() == "none":
             return
         else:
             raise ValueError("Invalid filter type.")
