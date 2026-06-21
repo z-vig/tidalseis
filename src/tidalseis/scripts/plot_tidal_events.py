@@ -1,4 +1,5 @@
 from pathlib import Path
+from importlib.resources import files, as_file
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,20 +17,24 @@ from tidalseis.types import (
     is_valid_tidal_locality,
 )
 
-plt.style.use(Path(__file__).parent / "publications.mplstyle")
-
 
 @click.command()
 @click.argument(
-    "network", type=click.Choice(tidal_localities), case_sensitive=False
+    "network", type=click.Choice(tidal_localities, case_sensitive=False)
 )
 @click.argument("event_catalog_fp", type=str)
-@click.option("-s", "--save_directory", type=str)
+@click.option("-d", "--degree_per_bin", type=float, default=8)
+@click.option("-s", "--save_directory", type=str, default="none")
 def main(
     network: TidalLocality,
     event_catalog_fp: str | Path,
-    save_directory: str | Path = "none",
+    degree_per_bin: float,
+    save_directory: str | Path,
 ) -> None:
+    with as_file(
+        files("tidalseis.data").joinpath("publications.mplstyle")
+    ) as style:
+        plt.style.use(style)
     cap_network = network.title()
     if not is_valid_tidal_locality(cap_network):
         raise ValueError(f"Invalid network name: {cap_network}")
@@ -37,8 +42,10 @@ def main(
     find_tide_peaks(td)
     phase_arr = utc2phase(td.time, td.get_relative_peak_times())
 
+    nbins = int(360 / degree_per_bin)
+
     wrapped_height, phase_bins, wrapped_std = wrap_phase_arr(
-        td.height, phase_arr % 360
+        td.height, phase_arr % 360, nbins=nbins
     )
 
     event_catalog = CatalogModel.from_json(event_catalog_fp)
@@ -75,4 +82,18 @@ def main(
     save_fp = save_dir / "tide_height_seismic_activity"
     for i in [".svg", ".png"]:
         plt.savefig(save_fp.with_suffix(i))
+
+    summary = np.stack(
+        [phase_bins[1:], wrapped_height, wrapped_std, wrapped_events], axis=-1
+    )
+
+    with open(save_dir / "tide_height_seismic_activity_data.csv", "w") as file:
+        file.write(
+            "tidal_phase, tidal_height, tidal_height_std, number_of_events\n"
+        )
+        for n in range(summary.shape[0]):
+            vals = [str(float(i)) for i in summary[n, :]]
+            file.write(", ".join(vals))
+            file.write("\n")
+
     plt.show()
