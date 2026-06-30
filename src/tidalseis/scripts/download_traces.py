@@ -33,7 +33,9 @@ def main(network: TidalLocality, save: Path | str | None) -> None:
         net["network_id"],
         net["network_start"],
         net["network_end"],
-        net["channel_id"],
+        channel_search=net["channel_id"],
+        station_search=net.get("station_id"),
+        location_code=net["location_id"],
     )
     info = get_channel_info(inv)
 
@@ -43,9 +45,9 @@ def main(network: TidalLocality, save: Path | str | None) -> None:
     for sta, cha_list in info:
         if len(cha_list) > 1:
             raise ValueError("Single channel networks only.")
+        net.update({"station_id": sta.code})
         _, trace_models = get_trace_models(
             **net,
-            station_id=sta.code,
         )
 
         if (svdir := net.get("save_directory")) is None:

@@ -11,7 +11,7 @@ TidalLocality: TypeAlias = Literal[
     "Amery Ice Shelf",
     "DRRIS",
     "Pine Island",
-    "Nascent Rift RIS",
+    "Nascent Rift",
     "ARROW",
     "Langhovde Glacier",
 ]
@@ -20,7 +20,7 @@ tidal_localities: list[TidalLocality] = [
     "Amery Ice Shelf",
     "DRRIS",
     "Pine Island",
-    "Nascent Rift RIS",
+    "Nascent Rift",
     "ARROW",
     "Langhovde Glacier",
 ]

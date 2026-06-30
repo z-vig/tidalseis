@@ -73,12 +73,17 @@ def main(
     ax.set_ylabel("Tide Height", color="r")
     ax2.set_ylabel("# of Events", color="b")
 
-    ax.set_title("Amery Ice Shelf Seismic Activity")
+    # ax.set_title("Pine Island Glacier Seismic Activity")
+
+    ax.set_gid("MainAxes")
 
     if save_directory == "none":
         save_dir = Path(event_catalog_fp)
     else:
         save_dir = Path(save_directory)
+        if not save_dir.is_dir():
+            save_dir.mkdir(parents=True)
+
     save_fp = save_dir / "tide_height_seismic_activity"
     for i in [".svg", ".png"]:
         plt.savefig(save_fp.with_suffix(i))

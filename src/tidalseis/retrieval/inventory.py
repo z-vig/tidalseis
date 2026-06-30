@@ -11,14 +11,20 @@ def get_iris_inventory(
     network_code: str,
     network_start: datetime,
     network_end: datetime,
+    *,
+    location_code: str = "",
     channel_search: str = "*",
+    station_search: str | None = None,
 ) -> Inventory:
     client = Client("Earthscope")
+    print(network_code, channel_search, station_search)
+    if station_search is None:
+        station_search = "*"
     inventory = vld.validate_inventory(
         client.get_stations(
             network=network_code,
-            station="*",
-            location="",
+            station=station_search,
+            location=location_code,
             channel=channel_search,
             level="channel",
             starttime=UTCDateTime(network_start),

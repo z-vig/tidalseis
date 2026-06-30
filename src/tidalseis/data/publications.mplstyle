@@ -14,7 +14,7 @@ axes.edgecolor  : 000000  # color: #000000
 axes.labelsize  : 11
 axes.labelweight: bold
 axes.labelcolor : 000000
-axes.facecolor  : f5f5f5  #f5f5f5
+axes.facecolor  : f5f5f5
 axes.titleweight: bold
 axes.linewidth  : 2
 
@@ -42,4 +42,7 @@ figure.facecolor: none
 
 # ---- Saving ----
 savefig.facecolor  : none
+savefig.dpi: 1200
+path.simplify: False
+svg.fonttype: none
 
