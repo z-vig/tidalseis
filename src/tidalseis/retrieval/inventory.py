@@ -17,7 +17,6 @@ def get_iris_inventory(
     station_search: str | None = None,
 ) -> Inventory:
     client = Client("Earthscope")
-    print(network_code, channel_search, station_search)
     if station_search is None:
         station_search = "*"
     inventory = vld.validate_inventory(
